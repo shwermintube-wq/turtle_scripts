@@ -107,7 +107,7 @@ m.facing = "north"
 function m.findX(x)
     local pos = m.sync()
 
-    local location = x.x
+    local location = x
 
     local dist = pos.x - location
     local steps = math.abs(dist)
