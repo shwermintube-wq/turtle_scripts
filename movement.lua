@@ -107,15 +107,17 @@ m.facing = "north"
 function m.findX(x)
     local pos = m.sync()
 
-    local dist = pos.x - x
+    local location = x.x
+
+    local dist = pos.x - location
     local steps = math.abs(dist)
-    if pos.x ~= x then
-        if pos.x < x then
+    if pos.x ~= location then
+        if pos.x < location then
             m.turnAround()
             for i=1, steps do
                 m.forward()
             end
-        elseif pos.x > x then
+        elseif pos.x > location then
             for i=1, steps do
                 m.forward()
             end
@@ -367,7 +369,7 @@ function m.bank()
 
     }
 
-    if pos.x == entrance.x and pos.z == entrance.z and pos.y == entrance.y and m.facing == "north" then
+    if m.facing == "north" then
         local x = bankCoords.x
         local y = bankCoords.y
         local z = bankCoords.z
