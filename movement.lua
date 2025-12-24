@@ -108,24 +108,47 @@ function m.findX(x)
     local pos = m.sync()
 
     local location = x
+    local facing = m.facing
 
     print(location)
 
     local dist = pos.x - location
     local steps = math.abs(dist)
+
     if pos.x ~= location then
         if pos.x < location then
-            m.turnAround()
-            for i=1, steps do
+            if facing ~= "north" then
+                if facing == "west" then
+                    m.right()
+                elseif facing == "east" then
+                    m.left()
+                elseif facing == "south" then
+                    m.turnAround()
+                end
+            else
+                for i=1, steps do
                 m.forward()
+                end
             end
         elseif pos.x > location then
-            for i=1, steps do
+            if facing ~= "north" then
+                if facing == "east" then
+                    m.right()
+                elseif facing == "west" then
+                    m.left()
+                elseif facing == "south" then
+                    m.turnAround()
+                end
+            else
+                for i=1, steps do
                 m.forward()
+                end
             end
         end
     else
     end
+    
+    
 end
 
  function m.turnAround()
@@ -174,18 +197,43 @@ end
 
     local dist = pos.z - z
     local steps = math.abs(dist)
-    if pos.z ~= z then
-        if pos.z < z then
-             m.turnAround()
-            for i=1, steps do
+
+    local location = z
+    local facing = m.facing
+
+    if pos.z ~= location then
+        if pos.z < location then
+            if facing ~= "south" then
+                if facing == "west" then
+                    m.left()
+                elseif facing == "east" then
+                    m.right()
+                elseif facing == "north" then
+                    m.turnAround()
+                end
+            else
+                for i=1, steps do
                 m.forward()
+                end
             end
-        elseif pos.z > z then
-            for i=1, steps do
-                 m.forward()
+
+        elseif pos.z > location then
+            if facing ~= "north" then
+                if facing == "east" then
+                    m.left()
+                elseif facing == "west" then
+                    m.right()
+                elseif facing == "south" then
+                    m.turnAround()
+                end
+            else
+                for i=1, steps do
+                    m.forward()
+                end
             end
         end
     else
+        
     end
 
  end
@@ -195,20 +243,30 @@ end
 
     local dist = pos.y - y
     local steps = math.abs(dist)
+    
+    local facing = m.facing
+
     if pos.y ~= y then
-        if pos.y < y then
-            for i=1, steps do
-                m.up()
+        if facing ~= "north" then
+            if facing == "west" then
+                m.right()
+            elseif facing == "east" then
+                m.left()
+            elseif facing == "south" then
+                m.turnAround()
             end
-        elseif pos.y > y then
+        else
             for i=1, steps do
-                 m.down()
+                if pos.y < y then
+                    m.up()
+                elseif pos.y > y then
+                    m.down()
+                end
             end
         end
     else
     end
-
- end
+  end
 
  function m.entrance()
     local phase = 1
