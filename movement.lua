@@ -250,6 +250,10 @@ local m = {
 
 
             end -- End of phase 2 
+
+            if phase == 3 then
+                print("Phase 3 check")
+            end
         end -- Initial check
          
           
