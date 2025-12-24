@@ -1,4 +1,4 @@
-local facing = "north"
+llocal facing = "north"
 
 local m = {
     pos = {x=0,y=0,z=0},
@@ -246,7 +246,6 @@ local m = {
             elseif pos.x ==entrance.x and pos.z == entrance.z then
                 atZ = true
                 phase = 3
-                return
             end -- End of phase 2 
 
             if phase == 3 then
