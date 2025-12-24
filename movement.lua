@@ -368,9 +368,14 @@ function m.bank()
     }
 
     if pos.x == entrance.x and pos.z == entrance.z and pos.y == entrance.y and m.facing == "north" then
-        m.findX(bank.x)
-        m.findZ(bank.z)
-        m.findY(bank.y)
+        local x = bank.x
+        local y = bank.y
+        local z = bank.z
+        
+
+        m.findX(x)
+        m.findZ(z)
+        m.findY(y)
 
         local slots = 16
         local selectedSlot = 1
