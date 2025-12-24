@@ -242,13 +242,11 @@ local m = {
                             m.forward()
                         end
                     end
-                else
-                    phase = 3
-                    atZ = true
-                    return
                 end
-
-
+            elseif pos.x ==entrance.x and pos.z == entrance.z then
+                atZ = true
+                phase = 3
+                return
             end -- End of phase 2 
 
             if phase == 3 then
