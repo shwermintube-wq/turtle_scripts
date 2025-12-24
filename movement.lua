@@ -4,7 +4,7 @@ local m = {
     pos = {x=0,y=0,z=0},
     dir = 0
 }
- 
+
  function m.sync()
      local x,y,z = gps.locate()
      return {x=x,y=y,z=z, facing = facing}
@@ -220,8 +220,7 @@ local m = {
                 end
             else
                 phase = 2
-                    atX = true
-                    return
+                atX = true
             end -- End of fix facing and distance
         end -- End of phase 1
              os.sleep(0)
@@ -230,34 +229,31 @@ local m = {
 
            if phase == 2 then  
             print("Phase 2 check")
-             --[[ if pos.z ~= entrance.z then
-                 -- works
-                 if facing == "north" and pos.z > entrance.z or facing == "south" and pos.z < entrance.z then
-                     -- Add not north
-                     print("Not North and greater than z or South and less than Z")
-                 else
-                     local steps = 0
-                     local dist = pos.z - entrance.z
-                     steps = dist
-                     
-                     if dist > 0 or dist == 0 then
-                         for i = 1, steps do
-                             m.forward()
-                         end
-                     elseif dist < 0 then
-                         steps = math.abs(dist)
-                         for i = 1, steps do
-                             m.forward()
-                         end
-                     end
-                 end
-             end
+            local dist = pos.z - entrance.z
+            local steps = math.abs(dist)
 
-            end -- End of phase 2 ]]
+                if pos.z ~= entrance.z then
+                    if pos.z < entrance.z then
+                        m.turnAround()
+                        for i=1, steps do
+                            m.forward()
+                        end
+                    elseif pos.z > entrance.z then
+                        for i=1, steps do
+                            m.forward()
+                        end
+                    end
+                else
+                    phase = 3
+                    atZ = true
+                    return
+                end
+
+            end -- End of phase 2 
         end -- Initial check
          
           
     end -- End of while true
  end -- End of Entrance Function
-end
+
 return m
