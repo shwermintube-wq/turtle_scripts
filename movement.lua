@@ -149,10 +149,7 @@ local m = {
     while true do
         local pos = m.sync()
          
-        if pos.x ~= entrance.x or pos.y ~= entrance.y or pos.z ~= entrance.z then
-                
-                
-                
+        if pos.x ~= entrance.x or pos.y ~= entrance.y or pos.z ~= entrance.z then     
                 -- Fixing the X value
         if phase == 1 then   
             if pos.x ~= entrance.x then 
@@ -251,6 +248,11 @@ local m = {
             if phase == 3 then
                 print("Phase 3 check")
             end
+        elseif pos.x == entrance.x and pos.y == entrance.y and pos.z == entrance.z then
+            atZ = true
+            atY = true
+            phase = 3
+            return
         end -- Initial check
           
     end -- End of while true
