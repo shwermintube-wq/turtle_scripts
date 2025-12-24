@@ -90,6 +90,13 @@ local function handleCommand(sender, msg)
         move.findX(BANK.x)
         move.findZ(BANK.z)
         move.findY(BANK.y)
+
+        for slot=1,16 do
+            move.select(slot)
+            move.drop()
+        end
+        turtle.select(1)
+        move.turnAround()
     end
 end -- End of handler
 
