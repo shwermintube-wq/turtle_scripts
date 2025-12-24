@@ -21,28 +21,28 @@ local function handleCommand(sender, msg)
     local msg = args[1]
 
     if msg == "up" then
-        local dist = tonumber(args[2])
+        local dist = tonumber(args[2]) or 1
         for i=1, dist do
             move.up(1)
         end
         return "Moved up"..dist
 
     elseif msg == "down" then
-        local dist = tonumber(args[2])
+        local dist = tonumber(args[2]) or 1
         for i=1, dist do
             move.down(1)
         end
         return "Moved down"..dist
 
      elseif msg == "forward" then
-        local dist = tonumber(args[2])
+        local dist = tonumber(args[2] ) or 1
         for i=1, dist do
             move.forward(1)
         end
         return "Moved forward"..dist
         
          elseif msg == "back" then
-        local dist = tonumber(args[2])
+        local dist = tonumber(args[2]) or 1
         for i=1, dist do
             move.back(1)
         end
@@ -50,14 +50,14 @@ local function handleCommand(sender, msg)
 
     
     elseif msg == "left" then
-        local amount = tonumber(args[2])
+        local amount = tonumber(args[2]) or 1
         for i=1, amount do
             move.left()
         end
         return "Turned left"..amount
 
     elseif msg == "right" then
-        local amount = tonumber(args[2])
+        local amount = tonumber(args[2]) or 1
         for i=1, amount do
             move.right()
         end
