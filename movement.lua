@@ -103,6 +103,26 @@ local m = {
      turtle.suckDown()
  end
  
+function m.findX(x)
+    local pos = m.sync()
+
+    local dist = pos.x - x
+    local steps = math.abs(dist)
+    if pos.x ~= x then
+        if pos.x < x then
+            m.turnAround()
+            for i=1, steps do
+                m.forward()
+            end
+        elseif pos.x > x then
+            for i=1, steps do
+                m.forward()
+            end
+        end
+    else
+    end
+end
+
  function m.turnAround()
      for i =1,2 do m.left() end
  end
@@ -130,7 +150,61 @@ local m = {
  function m.getFacing()
      print(facing)
  end
- 
+
+ function m.faceNorth()
+    if facing ~= "north" then
+        if facing == "south" then
+            m.turnAround()
+        elseif facing == "east" then
+            m.right()
+        elseif facing == "west" then
+            m.left()
+        end
+    else
+    end
+ end
+
+ function m.findZ(z)
+    local pos = m.sync()
+
+    local dist = pos.z - z
+    local steps = math.abs(dist)
+    if pos.z ~= z then
+        if pos.z < z then
+             m.turnAround()
+            for i=1, steps do
+                m.forward()
+            end
+        elseif pos.z > z then
+            for i=1, steps do
+                 m.forward()
+            end
+        end
+    else
+    end
+
+ end
+
+  function m.findY(y)
+    local pos = m.sync()
+
+    local dist = pos.y - y
+    local steps = math.abs(dist)
+    if pos.y ~= y then
+        if pos.y < y then
+            for i=1, steps do
+                m.up()
+            end
+        elseif pos.y > y then
+            for i=1, steps do
+                 m.down()
+            end
+        end
+    else
+    end
+
+ end
+
  function m.entrance()
     local phase = 1
       
@@ -157,7 +231,7 @@ local m = {
                 local steps = math.abs(dist)
 
                 if facing == "north" and pos.x < entrance.x then -- Start of facing and distance
-                    m.right()
+                    m.faceNorth()
                     for i=1, steps do
                         m.forward()
                     end
@@ -167,7 +241,7 @@ local m = {
                     for i=1, steps do
                         m.forward()
                     end
-                    m.left()
+                    m.faceNorth()
 
                 elseif facing == "east" and pos.x < entrance.x then
                     m.turnAround()
@@ -249,15 +323,16 @@ local m = {
                 print("Phase 3 check")
                 if pos.y ~= entrance.y then
                     if pos.x == entrance.x and pos.z == entrance.z then
+                        print("checky")
                         local dist = pos.y - entrance.y
-                        local steps = math.abs(dist)
+                        local hops = math.abs(dist)
 
                         if pos.y < entrance.y then
-                            for i = 1, steps do
+                            for i = 1, hops do
                                 m.up()
                             end
                         elseif pos.y > entrance.y then
-                            for i = 1, steps do
+                            for i = 1, hops do
                                 m.down()
                             end
                         end
@@ -268,10 +343,36 @@ local m = {
         elseif pos.x == entrance.x and pos.y == entrance.y and pos.z == entrance.z then
             atZ = true
             atY = true
+            m.faceNorth()
             return atX,atY,atZ
         end -- Initial check
           
     end -- End of while true
  end -- End of Entrance Function
+
+function m.bank()
+    local pos = m.sync()
+
+    local entrance = {
+        x = 15742,
+        y = 254,
+        z = 7052
+    }
+
+    local bank = {
+        x = 15741,
+        y = 253,
+        z = 7060
+
+    }
+
+    if pos.x == entrance.x and pos.z == entrance.z and pos.y == entrance.y and facing == "north" then
+        m.findX(bank.x)
+        m.findZ(bank.z)
+        m.findY(bank.y)
+        
+        
+    end
+end
 
 return m
