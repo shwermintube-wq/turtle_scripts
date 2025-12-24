@@ -225,7 +225,6 @@ end
     }
      
 
-    while true do
         local pos = m.sync()
          
         if pos.x ~= entrance.x or pos.y ~= entrance.y or pos.z ~= entrance.z then     
@@ -353,14 +352,13 @@ end
                 end
                 
             end
-        elseif pos.x == entrance.x and pos.y == entrance.y and pos.z == entrance.z then
+        else
             atZ = true
             atY = true
             return atX,atY,atZ
         end -- Initial check
           
-    end -- End of while true
- end -- End of Entrance Function
+    end -- End of Entrance Function
 
 function m.bank()
     local pos = m.sync()
