@@ -381,6 +381,7 @@ function m.bank()
         m.findZ(z)
         m.findY(y)
 
+    else
         local slots = 16
         local selectedSlot = 1
 
@@ -392,6 +393,7 @@ function m.bank()
         turtle.select(1)
         selectedSlot = 1
         m.turnAround()
+        return "Banked"
 
     end
 end
