@@ -356,7 +356,6 @@ end
         elseif pos.x == entrance.x and pos.y == entrance.y and pos.z == entrance.z then
             atZ = true
             atY = true
-            m.faceNorth()
             return atX,atY,atZ
         end -- Initial check
           
