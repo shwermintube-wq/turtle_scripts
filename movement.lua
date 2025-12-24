@@ -224,143 +224,25 @@ end
         z = 7052
     }
      
+    local pos = m.sync()
+    local atEntrance = false
 
-    while true do
-        local pos = m.sync()
-         
-        if pos.x ~= entrance.x or pos.y ~= entrance.y or pos.z ~= entrance.z then     
-                -- Fixing the X value
-        if phase == 1 then   
-            if pos.x ~= entrance.x then 
-                local dist = pos.x - entrance.x
-                local steps = math.abs(dist)
+    while atEntrance == false do
+        if pos.x ~= entrance.x then
+        m.findX(entrance.x)
+        end
+        if pos.z ~= entrance.z then
+            m.findZ(entrance.z)
+        end
+        if pos.y ~= entrance.y then
+                m.findY(entrance.y)
+        end
+        if pos.x == entrance.x and pos.y == entrance.y and pos.z == entrance.z then
+            atEntrance = true
+        end
+    end
 
-                if m.facing == "north" and pos.x < entrance.x then -- Start of m.facing and distance
-                    m.faceNorth()
-                    for i=1, steps do
-                        m.forward()
-                        os.sleep(0)
-                    end
-                    m.left()
-
-                elseif m.facing == "west" and pos.x < entrance.x then
-                    for i=1, steps do
-                        m.forward()
-                        os.sleep(0)
-                    end
-                    m.faceNorth()
-
-                elseif m.facing == "east" and pos.x < entrance.x then
-                    m.turnAround()
-                    for i=1, steps do
-                        m.forward()
-                        os.sleep(0)
-                    end
-                    m.left()
-
-                elseif m.facing == "south" and pos.x < entrance.x then
-                    m.left()
-                    for i=1, steps do
-                        m.forward()
-                        os.sleep(0)
-                    end
-                    m.left()
-                
-                -- pos.x < entrance.x   ^
-
-                elseif m.facing == "north" and pos.x > entrance.x then
-                    m.left()
-                    for i=1, steps do
-                        m.forward()
-                        os.sleep(0)
-                    end
-                    m.right()
-                
-                elseif m.facing == "east" and pos.x > entrance.x then
-                    for i=1, steps do
-                        m.forward()
-                        os.sleep(0)
-                    end
-                    m.right()
-
-                elseif m.facing == "south" and pos.x > entrance.x then
-                    m.right()
-                    for i=1, steps do
-                        m.forward()
-                        os.sleep(0)
-                    end
-                    m.right()
-                elseif m.facing == "west" and pos.x > entrance.x then
-                    m.turnAround()
-                    for i=1, steps do
-                        m.forward()
-                        os.sleep(0)
-                    end
-                    m.right()
-
-                -- pos.x > entrance.x
-                else
-                    
-                end
-            else
-                phase = 2
-                atX = true
-            end -- End of fix m.facing and distance
-        end -- End of phase 1
-             os.sleep(0)
-
-            -- Fixing z
-
-           if phase == 2 then  
-            print("Phase 2 check")
-            local dist = pos.z - entrance.z
-            local steps = math.abs(dist)
-                if pos.z ~= entrance.z then
-                    if pos.z < entrance.z then
-                        m.turnAround()
-                        for i=1, steps do
-                            m.forward()
-                        end
-                    elseif pos.z > entrance.z then
-                        for i=1, steps do
-                            m.forward()
-                        end
-                    end
-                else
-                    atZ = true
-                    phase = 3
-                end
-            end -- End of phase 2 
-
-            if phase == 3 then
-                print("Phase 3 check")
-                if pos.y ~= entrance.y then
-                    if pos.x == entrance.x and pos.z == entrance.z then
-                        print("checky")
-                        local dist = pos.y - entrance.y
-                        local hops = math.abs(dist)
-
-                        if pos.y < entrance.y then
-                            for i = 1, hops do
-                                m.up()
-                            end
-                        elseif pos.y > entrance.y then
-                            for i = 1, hops do
-                                m.down()
-                            end
-                        end
-                    end
-                end
-                
-            end
-        else
-            atZ = true
-            atY = true
-            return atX,atY,atZ
-        end -- Initial check
-          
-    end -- End of while true
- end -- End of Entrance Function
+end
 
 function m.bank()
     local pos = m.sync()
