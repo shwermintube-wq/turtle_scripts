@@ -5,6 +5,7 @@ local net = require("lib.net")
 local entrance = require("lib.locations.entrance")
 local bank = require("lib.locations.bank")
 
+local BANK = bank.pos
 local ENTRANCE = entrance.pos
 local HOME = home.load()
 
@@ -86,9 +87,9 @@ local function handleCommand(sender, msg)
         move.entrance()
 
     elseif msg == "bank" then
-        move.findX(bank.x)
-        move.findZ(bank.z)
-        move.findY(bank.y)
+        move.findX(BANK.x)
+        move.findZ(BANK.z)
+        move.findY(BANK.y)
     end
 end -- End of handler
 
