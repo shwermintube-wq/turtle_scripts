@@ -116,31 +116,44 @@ function m.findX(x)
     local steps = math.abs(dist)
 
     if pos.x ~= location then
+        print("Not at location")
         if pos.x < location then
+            print("pos.x less than location")
             if facing ~= "north" then
+                print("Not facing north")
                 if facing == "west" then
+                    print("facing west")
                     m.right()
                 elseif facing == "east" then
+                    print("facing east")
                     m.left()
                 elseif facing == "south" then
+                    print("facing south")
                     m.turnAround()
                 end
             else
+                print("facing north")
                 m.right()
                 for i=1, steps do
                 m.forward()
                 end
             end
         elseif pos.x > location then
+            print("pos.x greater than location")
             if facing ~= "north" then
+                print("not facing north")
                 if facing == "east" then
+                    print("facing east")
                     m.right()
                 elseif facing == "west" then
+                    print("facing west")
                     m.left()
                 elseif facing == "south" then
+                    print("facing south")
                     m.turnAround()
                 end
             else
+                print("facing north")
                 m.left()
                 for i=1, steps do
                 m.forward()
