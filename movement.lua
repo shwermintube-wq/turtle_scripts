@@ -126,6 +126,7 @@ function m.findX(x)
                     m.turnAround()
                 end
             else
+                m.right()
                 for i=1, steps do
                 m.forward()
                 end
@@ -140,6 +141,7 @@ function m.findX(x)
                     m.turnAround()
                 end
             else
+                m.left()
                 for i=1, steps do
                 m.forward()
                 end
@@ -233,7 +235,7 @@ end
             end
         end
     else
-        
+
     end
 
  end
