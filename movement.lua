@@ -239,12 +239,14 @@ end
                     m.faceNorth()
                     for i=1, steps do
                         m.forward()
+                        os.sleep(0)
                     end
                     m.left()
 
                 elseif m.facing == "west" and pos.x < entrance.x then
                     for i=1, steps do
                         m.forward()
+                        os.sleep(0)
                     end
                     m.faceNorth()
 
@@ -252,6 +254,7 @@ end
                     m.turnAround()
                     for i=1, steps do
                         m.forward()
+                        os.sleep(0)
                     end
                     m.left()
 
@@ -259,6 +262,7 @@ end
                     m.left()
                     for i=1, steps do
                         m.forward()
+                        os.sleep(0)
                     end
                     m.left()
                 
@@ -268,12 +272,14 @@ end
                     m.left()
                     for i=1, steps do
                         m.forward()
+                        os.sleep(0)
                     end
                     m.right()
                 
                 elseif m.facing == "east" and pos.x > entrance.x then
                     for i=1, steps do
                         m.forward()
+                        os.sleep(0)
                     end
                     m.right()
 
@@ -281,12 +287,14 @@ end
                     m.right()
                     for i=1, steps do
                         m.forward()
+                        os.sleep(0)
                     end
                     m.right()
                 elseif m.facing == "west" and pos.x > entrance.x then
                     m.turnAround()
                     for i=1, steps do
                         m.forward()
+                        os.sleep(0)
                     end
                     m.right()
 
