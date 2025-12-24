@@ -109,6 +109,8 @@ function m.findX(x)
 
     local location = x
 
+    print(location)
+
     local dist = pos.x - location
     local steps = math.abs(dist)
     if pos.x ~= location then
