@@ -247,6 +247,7 @@ local m = {
 
             if phase == 3 then
                 print("Phase 3 check")
+                return
             end
         elseif pos.x == entrance.x and pos.y == entrance.y and pos.z == entrance.z then
             atZ = true
