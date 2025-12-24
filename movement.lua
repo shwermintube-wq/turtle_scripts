@@ -247,13 +247,28 @@ local m = {
 
             if phase == 3 then
                 print("Phase 3 check")
-                return
+                if pos.y ~= entrance.y then
+                    if pos.x == entrance.x and pos.z == entrance.z then
+                        local dist = pos.y - entrance.y
+                        local steps = math.abs(dist)
+
+                        if pos.y < entrance.y then
+                            for i = 1, steps do
+                                m.up()
+                            end
+                        elseif pos.y > entrance.y then
+                            for i = 1, steps do
+                                m.down()
+                            end
+                        end
+                    end
+                end
+                
             end
         elseif pos.x == entrance.x and pos.y == entrance.y and pos.z == entrance.z then
             atZ = true
             atY = true
-            phase = 3
-            return
+            return atX,atY,atZ
         end -- Initial check
           
     end -- End of while true
