@@ -371,7 +371,7 @@ function m.bank()
 
     }
 
-    if m.facing == "north" then
+    if pos.x ~= bankCoords.x or pos.y ~= bankCoords.y or pos.z ~= bankCoords.z then
         local x = bankCoords.x
         local y = bankCoords.y
         local z = bankCoords.z
