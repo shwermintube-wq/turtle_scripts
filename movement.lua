@@ -1,4 +1,4 @@
-llocal facing = "north"
+local facing = "north"
 
 local m = {
     pos = {x=0,y=0,z=0},
@@ -242,17 +242,16 @@ local m = {
                             m.forward()
                         end
                     end
+                else
+                    atZ = true
+                    phase = 3
                 end
-            elseif pos.x ==entrance.x and pos.z == entrance.z then
-                atZ = true
-                phase = 3
             end -- End of phase 2 
 
             if phase == 3 then
                 print("Phase 3 check")
             end
         end -- Initial check
-         
           
     end -- End of while true
  end -- End of Entrance Function
