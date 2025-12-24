@@ -1,13 +1,14 @@
-local facing = "north"
-
 local m = {
     pos = {x=0,y=0,z=0},
     dir = 0
 }
 
+m.facing = "north"
+
+
  function m.sync()
      local x,y,z = gps.locate()
-     return {x=x,y=y,z=z, facing = facing}
+     return {x=x,y=y,z=z, facing = m.facing}
  end
  
  function m.up()
@@ -27,19 +28,19 @@ local m = {
  
  function m.left()
      turtle.turnLeft()
-     if facing == "north" then facing = "west"
-     elseif facing == "east" then facing = "north"
-     elseif facing == "south" then facing = "east"
-     elseif facing == "west" then facing = "south"
+     if m.facing == "north" then m.facing = "west"
+     elseif m.facing == "east" then m.facing = "north"
+     elseif m.facing == "south" then m.facing = "east"
+     elseif m.facing == "west" then m.facing = "south"
      end
  end
  
  function m.right()
      turtle.turnRight()
-     if facing == "north" then facing = "east"
-     elseif facing == "east" then facing = "south"
-     elseif facing == "south" then facing = "west"
-     elseif facing == "west" then facing = "north"
+     if m.facing == "north" then m.facing = "east"
+     elseif m.facing == "east" then m.facing = "south"
+     elseif m.facing == "south" then m.facing = "west"
+     elseif m.facing == "west" then m.facing = "north"
      end
  end
  
@@ -148,16 +149,16 @@ end
  end
  
  function m.getFacing()
-     print(facing)
+     print(m.facing)
  end
 
  function m.faceNorth()
-    if facing ~= "north" then
-        if facing == "south" then
+    if m.facing ~= "north" then
+        if m.facing == "south" then
             m.turnAround()
-        elseif facing == "east" then
+        elseif m.facing == "east" then
             m.right()
-        elseif facing == "west" then
+        elseif m.facing == "west" then
             m.left()
         end
     else
@@ -230,27 +231,27 @@ end
                 local dist = pos.x - entrance.x
                 local steps = math.abs(dist)
 
-                if facing == "north" and pos.x < entrance.x then -- Start of facing and distance
+                if m.facing == "north" and pos.x < entrance.x then -- Start of m.facing and distance
                     m.faceNorth()
                     for i=1, steps do
                         m.forward()
                     end
                     m.left()
 
-                elseif facing == "west" and pos.x < entrance.x then
+                elseif m.facing == "west" and pos.x < entrance.x then
                     for i=1, steps do
                         m.forward()
                     end
                     m.faceNorth()
 
-                elseif facing == "east" and pos.x < entrance.x then
+                elseif m.facing == "east" and pos.x < entrance.x then
                     m.turnAround()
                     for i=1, steps do
                         m.forward()
                     end
                     m.left()
 
-                elseif facing == "south" and pos.x < entrance.x then
+                elseif m.facing == "south" and pos.x < entrance.x then
                     m.left()
                     for i=1, steps do
                         m.forward()
@@ -259,26 +260,26 @@ end
                 
                 -- pos.x < entrance.x   ^
 
-                elseif facing == "north" and pos.x > entrance.x then
+                elseif m.facing == "north" and pos.x > entrance.x then
                     m.left()
                     for i=1, steps do
                         m.forward()
                     end
                     m.right()
                 
-                elseif facing == "east" and pos.x > entrance.x then
+                elseif m.facing == "east" and pos.x > entrance.x then
                     for i=1, steps do
                         m.forward()
                     end
                     m.right()
 
-                elseif facing == "south" and pos.x > entrance.x then
+                elseif m.facing == "south" and pos.x > entrance.x then
                     m.right()
                     for i=1, steps do
                         m.forward()
                     end
                     m.right()
-                elseif facing == "west" and pos.x > entrance.x then
+                elseif m.facing == "west" and pos.x > entrance.x then
                     m.turnAround()
                     for i=1, steps do
                         m.forward()
@@ -292,7 +293,7 @@ end
             else
                 phase = 2
                 atX = true
-            end -- End of fix facing and distance
+            end -- End of fix m.facing and distance
         end -- End of phase 1
              os.sleep(0)
 
@@ -366,12 +367,23 @@ function m.bank()
 
     }
 
-    if pos.x == entrance.x and pos.z == entrance.z and pos.y == entrance.y and facing == "north" then
+    if pos.x == entrance.x and pos.z == entrance.z and pos.y == entrance.y and m.facing == "north" then
         m.findX(bank.x)
         m.findZ(bank.z)
         m.findY(bank.y)
-        
-        
+
+        local slots = 16
+        local selectedSlot = 1
+
+        for i=1, 16 do
+            turtle.select(selectedSlot)
+            turtle.drop()
+            selectedSlot = selectedSlot + 1
+        end
+        turtle.select(1)
+        selectedSlot = 1
+        m.turnAround()
+
     end
 end
 
