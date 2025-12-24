@@ -231,7 +231,6 @@ local m = {
             print("Phase 2 check")
             local dist = pos.z - entrance.z
             local steps = math.abs(dist)
-
                 if pos.z ~= entrance.z then
                     if pos.z < entrance.z then
                         m.turnAround()
@@ -248,6 +247,7 @@ local m = {
                     atZ = true
                     return
                 end
+
 
             end -- End of phase 2 
         end -- Initial check
