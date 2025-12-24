@@ -360,7 +360,7 @@ function m.bank()
         z = 7052
     }
 
-    local bank = {
+    local bankCoords = {
         x = 15741,
         y = 253,
         z = 7060
@@ -368,9 +368,9 @@ function m.bank()
     }
 
     if pos.x == entrance.x and pos.z == entrance.z and pos.y == entrance.y and m.facing == "north" then
-        local x = bank.x
-        local y = bank.y
-        local z = bank.z
+        local x = bankCoords.x
+        local y = bankCoords.y
+        local z = bankCoords.z
         
 
         m.findX(x)
