@@ -285,17 +285,9 @@ end
     }
      
     local pos = m.sync()
-    
 
-        if pos.x ~= entrance.x then
-        m.findX(entrance.x)
-        end
-        if pos.z ~= entrance.z then
-            m.findZ(entrance.z)
-        end
-        if pos.y ~= entrance.y then
-                m.findY(entrance.y)
-        end
+    m.findX(entrance.x)
+    
 
 end
 
