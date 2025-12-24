@@ -225,9 +225,8 @@ end
     }
      
     local pos = m.sync()
-    local atEntrance = false
+    
 
-    while atEntrance == false do
         if pos.x ~= entrance.x then
         m.findX(entrance.x)
         end
@@ -237,10 +236,6 @@ end
         if pos.y ~= entrance.y then
                 m.findY(entrance.y)
         end
-        if pos.x == entrance.x and pos.y == entrance.y and pos.z == entrance.z then
-            atEntrance = true
-        end
-    end
 
 end
 
