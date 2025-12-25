@@ -126,7 +126,8 @@ function m.findX(x)
                     elseif facing == "west" then
                         m.turnAround()
                     end
-                else
+                elseif facing == "east" then
+                    print("facing east")
                     for i=1, steps do
                         m.forward()
                     end
@@ -141,7 +142,7 @@ function m.findX(x)
                     elseif facing == "east" then
                         m.turnAround()
                     end
-                else
+                elseif facing == "west" then
                     for i=1, steps do
                         m.forward()
                     end
