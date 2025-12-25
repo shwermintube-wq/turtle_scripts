@@ -218,7 +218,7 @@ end
     
     
     if pos.z ~= location then
-        
+        while pos.z ~= location do
             if pos.z < location then
                 if m.facing ~= "south" then
                     if m.facing == "north" and pos.z < location then
@@ -251,11 +251,12 @@ end
                     end
                 end
             else
-
+                
             end
 
             pos = m.sync()
             os.sleep(0.5)
+        end
         
     else
     end
