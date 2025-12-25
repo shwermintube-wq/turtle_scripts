@@ -103,6 +103,10 @@ m.facing = "north"
  function m.suckDown()
      turtle.suckDown()
  end
+
+ function m.select(slot)
+    turtle.select(slot)
+ end
  
 function m.findX(x)
     local pos = m.sync()

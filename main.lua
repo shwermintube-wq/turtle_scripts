@@ -96,8 +96,6 @@ local function handleCommand(sender, msg)
         for i=1,16 do
             move.select(slot)
             move.drop()
-
-            slot = slot + 1
         end
         turtle.select(1)
         move.turnAround()
