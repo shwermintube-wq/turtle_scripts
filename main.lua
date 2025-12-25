@@ -90,6 +90,7 @@ local function handleCommand(sender, msg)
         local atBank = false
         local banked = false
 
+        print("Debug Bank")
         local n = 16
 
         local slot = 1
@@ -119,8 +120,6 @@ local function handleCommand(sender, msg)
                         move.drop()
                         slot = slot + 1
                     end
-
-                    banked = true
                 end
              end
             
