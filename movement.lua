@@ -8,11 +8,6 @@ local m = {
  function m.sync()
      local pos = gps.locate()
 
-     if type(pos) ~= "table" then
-        print(type(pos))
-        return nil
-     end
-
      m.saveTPos(pos.x,pos.z,pos.y)
      return {x=pos.x,y=pos.y,z=pos.z, facing = m.loadFacing()}
  end
@@ -59,11 +54,10 @@ local m = {
  end
 
  function m.createTPos()
-    
-    local sP = gps.locate()
     if not fs.exists("position.txt") then
-        
+        local sP = gps.locate()
         local file = fs.open("position.txt", "w")
+
         file.writeLine(sP.x)
         file.writeLine(sP.z)
         file.writeLine(sP.y)
@@ -140,7 +134,7 @@ local m = {
         file.close()
         print("Facing file created")
     else
-        print("File already exists")
+        print("Facing file already exists")
     end
  end
  
