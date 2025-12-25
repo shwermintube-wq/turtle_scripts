@@ -249,6 +249,7 @@ end
                         m.forward()
                     end
                 end
+            else
             end
 
             pos = m.sync()
