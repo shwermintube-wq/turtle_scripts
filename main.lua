@@ -91,11 +91,25 @@ local function handleCommand(sender, msg)
         move.findZ(BANK.z)
         move.findY(BANK.y)
 
+        local pos = move.sync()
+        local atBank = pos.x == BANK.x and pos.z == BANK.z and pos.y == BANK.y
+        local banked = false
+
+        
+
         local slot = 1
 
-        for i=1,16 do
-            move.select(slot)
-            move.drop()
+        while true do
+            if banked == true then return end
+            if atBank then
+                for i=1,16 do
+                    move.select(slot)
+                    move.drop()
+                end
+                banked = true
+            else
+            end
+
         end
         turtle.select(1)
         move.turnAround()
