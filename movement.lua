@@ -303,6 +303,8 @@ end
     local pos = m.sync()
 
     m.findX(entrance.x)
+    m.findZ(entrance.z)
+    m.findY(entrance.y)
     
 
 end
