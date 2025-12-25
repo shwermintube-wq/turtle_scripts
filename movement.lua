@@ -59,6 +59,7 @@ local m = {
  end
 
  function m.createTPos()
+    print(gps.locate())
     if not fs.exists("position.txt") then
         
         local file = fs.open("position.txt", "w")
