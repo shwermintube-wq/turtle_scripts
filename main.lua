@@ -102,7 +102,7 @@ local function handleCommand(sender, msg)
         if pos.x == BANK.x and pos.y == BANK.y and pos.z == BANK.z then atBank = true end
 
 
-
+        print(atBank)
         if atBank then
 
             if banked ~= true then 
