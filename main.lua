@@ -59,6 +59,9 @@ local function handleCommand(sender, msg)
             move.right()
         end
         return "Turned right"..amount
+    
+    elseif msg == "turnAround" then
+        move.turnAround()
 
     elseif msg == "detectUp" then
         move.dUp()
@@ -89,4 +92,5 @@ local function handleCommand(sender, msg)
     end
 end -- End of handler
 
+move.createFacing()
 net.listen(handleCommand)
