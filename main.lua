@@ -95,4 +95,4 @@ end -- End of handler
 net.listen(handleCommand)
 
 move.createFacing()
-move.createTPos()
+-- move.createTPos()
