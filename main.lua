@@ -13,7 +13,6 @@ move.sync()
 
 local function handleCommand(sender, msg)
     local args = {}
-    print("Debug", msg)
     for word in string.gmatch(msg, "%S+") do
         table.insert(args, word)
     end

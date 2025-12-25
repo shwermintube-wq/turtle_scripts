@@ -114,7 +114,6 @@ function m.findX(x)
     local location = x
 
 
-    print(location)
 
     local dist = pos.x - location
     local steps = math.abs(dist)
@@ -131,7 +130,7 @@ function m.findX(x)
                         m.turnAround()
                     end
                 elseif m.facing == "east" then
-                    print("facing east")
+                    
                     for i=1, steps do
                         m.forward()
                     end
@@ -147,7 +146,7 @@ function m.findX(x)
                         m.turnAround()
                     end
                 elseif m.facing == "west" then
-                    print("facing west")
+                    
                     for i=1, steps do
                         m.forward()
                     end
@@ -214,8 +213,8 @@ end
 
     local location = z
 
-    print(location)
-    print("finding Z")
+    
+    
     if pos.z ~= location then
         while pos.z ~= location do
             if pos.z < location then
@@ -228,7 +227,7 @@ end
                         m.left()
                     end
                 elseif m.facing == "south" then
-                    print("facing south")
+                    
                     for i=1, steps do
                         m.forward()
                     end
@@ -244,7 +243,7 @@ end
                         m.left()
                     end
                 elseif m.facing == "north" and pos.z > location then
-                    print("facing north")
+                    
                     for i=1, steps do
                         m.forward()
                     end
@@ -268,7 +267,6 @@ end
     local hops = math.abs(dist)
     local location = y
 
-    print(location)
 
     if pos.y ~= y then
         if m.facing ~= "north" then
