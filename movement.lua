@@ -1,3 +1,5 @@
+local BANK = require("lib.locations.bank")
+
 local m = {
     pos = {x=0,y=0,z=0},
     dir = 0
@@ -314,42 +316,22 @@ end
 end
 
 function m.bank()
-    local pos = m.sync()
 
-    local entrance = {
-        x = 15742,
-        y = 254,
-        z = 7052
-    }
+    local bank = BANK.pos
 
-    local bankCoords = {
-        x = 15741,
-        y = 253,
-        z = 7060
+    m.findX(bank.x)
+    m.findZ(bank.z)
+    m.findY(bank.y)
 
-    }
-
-    if pos.x ~= bankCoords.x or pos.y ~= bankCoords.y or pos.z ~= bankCoords.z then
-        
-        m.findX(bankCoords.x)
-        m.findZ(bankCoords.z)
-        m.findY(bankCoords.y)
-
-    else
-        local slots = 16
-        local selectedSlot = 1
-
-        for i=1, 16 do
-            turtle.select(selectedSlot)
-            turtle.drop()
-            selectedSlot = selectedSlot + 1
+    if m.detect() then
+        for slot=1,16 do
+            print("Banking")
+            m.select(slot)
+            m.drop()
         end
-        turtle.select(1)
-        selectedSlot = 1
-        m.turnAround()
-        
-
     end
+    turtle.select(1)
+    m.turnAround()
 end
 
 return m

@@ -3,9 +3,7 @@ local move = require("lib.movement")
 local safety = require("lib.safety")
 local net = require("lib.net")
 local entrance = require("lib.locations.entrance")
-local bank = require("lib.locations.bank")
 
-local BANK = bank.pos
 local ENTRANCE = entrance.pos
 local HOME = home.load()
 
