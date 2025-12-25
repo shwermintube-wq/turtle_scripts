@@ -120,6 +120,8 @@ local function handleCommand(sender, msg)
                         move.drop()
                         slot = slot + 1
                     end
+
+                    banked = true
                 end
              end
             
