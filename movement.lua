@@ -6,10 +6,11 @@ local m = {
 }
 
  function m.sync()
-     -- local pos = gps.locate()
+     local x,y,z = gps.locate()
+     local pos = {x=x,y=y,z=z}
      print(gps.locate())
-    --m.saveTPos(pos.x,pos.z,pos.y)
-    --return {x=pos.x,y=pos.y,z=pos.z, facing = m.loadFacing()} 
+    m.saveTPos(pos.x,pos.z,pos.y)
+    return {x=pos.x,y=pos.y,z=pos.z, facing = m.loadFacing()} 
  end
  
  function m.up()
@@ -55,7 +56,8 @@ local m = {
 
  function m.createTPos()
     if not fs.exists("position.txt") then
-        local sP = gps.locate()
+        local x,y,z = gps.locate()
+        local sP = {x=x,y=y,z=z}
         local file = fs.open("position.txt", "w")
 
         file.writeLine(sP.x)
