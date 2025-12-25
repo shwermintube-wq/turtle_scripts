@@ -220,7 +220,7 @@ end
         while pos.z ~= location do
             if pos.z < location then
                 if m.facing ~= "south" then
-                    if m.facing == "north" then
+                    if m.facing == "north" and pos.z < location then
                         m.turnAround()
                     elseif m.facing == "east" then
                         m.right()
@@ -235,7 +235,7 @@ end
                 end
 
             elseif pos.z > location then
-                if m.facing ~= "north" then
+                if m.facing ~= "north" and pos.z > location then
                     if m.facing == "west" then
                         m.right()
                     elseif m.facing == "south" then
