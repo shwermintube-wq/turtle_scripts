@@ -59,11 +59,11 @@ local m = {
  end
 
  function m.createTPos()
-    print(gps.locate())
+    
+    local sP = gps.locate()
     if not fs.exists("position.txt") then
         
         local file = fs.open("position.txt", "w")
-        local sP = gps.locate()
         file.writeLine(sP.x)
         file.writeLine(sP.z)
         file.writeLine(sP.y)
