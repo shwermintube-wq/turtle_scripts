@@ -91,9 +91,13 @@ local function handleCommand(sender, msg)
         move.findZ(BANK.z)
         move.findY(BANK.y)
 
-        for slot=1,16 do
+        local slot = 1
+
+        for i=1,16 do
             move.select(slot)
             move.drop()
+
+            slot = slot + 1
         end
         turtle.select(1)
         move.turnAround()
