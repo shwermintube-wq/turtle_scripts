@@ -108,7 +108,7 @@ function m.findX(x)
     local pos = m.sync()
 
     local location = x
-    local facing = m.facing
+    local facing = m.sync().facing
 
     print(location)
 
@@ -140,6 +140,7 @@ function m.findX(x)
             end
         elseif pos.x > location then
             print("pos.x greater than location")
+            print(facing)
             if facing ~= "north" then
                 print("not facing north")
                 if facing == "east" then
@@ -167,7 +168,7 @@ function m.findX(x)
 end
 
  function m.turnAround()
-     for i =1,2 do m.left() end
+     for i=1,2 do m.left() end
  end
  
  function m.getItemDetail()
@@ -214,7 +215,7 @@ end
     local steps = math.abs(dist)
 
     local location = z
-    local facing = m.facing
+    local facing = m.sync().facing
 
     if pos.z ~= location then
         if pos.z < location then
@@ -259,7 +260,7 @@ end
     local dist = pos.y - y
     local steps = math.abs(dist)
     
-    local facing = m.facing
+    local facing = m.sync().facing
 
     if pos.y ~= y then
         if facing ~= "north" then
@@ -321,14 +322,10 @@ function m.bank()
     }
 
     if pos.x ~= bankCoords.x or pos.y ~= bankCoords.y or pos.z ~= bankCoords.z then
-        local x = bankCoords.x
-        local y = bankCoords.y
-        local z = bankCoords.z
         
-
-        m.findX(x)
-        m.findZ(z)
-        m.findY(y)
+        m.findX(bankCoords.x)
+        m.findZ(bankCoords.z)
+        m.findY(bankCoords.y)
 
     else
         local slots = 16
