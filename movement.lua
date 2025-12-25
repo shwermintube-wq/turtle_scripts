@@ -419,6 +419,8 @@ end
      
     local pos = m.loadTPos()
 
+    print(pos)
+
     if pos.x == entrance.x and pos.z == entrance.z and pos.y == entrance.y then
         return
     end
@@ -427,7 +429,6 @@ end
 
         pos = m.sync()
 
-        
         if pos.x ~= entrance.x then
             m.findX(entrance.x)
             
