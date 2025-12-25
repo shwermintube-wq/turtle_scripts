@@ -106,8 +106,11 @@ local function handleCommand(sender, msg)
         if atBank then
 
             if banked ~= true then 
+                print("Banking check 1")
                 if atBank then
+                    print("Banking check 2")
                     for i=1, n do
+                        print("Banking check 3")
                         if i == n then
                             move.select(slot)
                             move.drop()
