@@ -235,7 +235,7 @@ end
                 end
 
             elseif pos.z > location then
-                if m.facing ~= "north" and pos.z > location then
+                if m.facing ~= "north" then
                     if m.facing == "west" then
                         m.right()
                     elseif m.facing == "south" then
@@ -243,7 +243,7 @@ end
                     elseif m.facing == "east" then
                         m.left()
                     end
-                elseif m.facing == "north" then
+                elseif m.facing == "north" and pos.z > location then
                     print("facing north")
                     for i=1, steps do
                         m.forward()
