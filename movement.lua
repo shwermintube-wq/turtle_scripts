@@ -214,32 +214,32 @@ end
     if pos.z ~= location then
         while pos.z ~= location do
             if pos.z < location then
-                if m.facing ~= "east" then
+                if m.facing ~= "south" then
                     if m.facing == "north" then
-                        m.right()
-                    elseif m.facing == "south" then
-                        m.left()
-                    elseif m.facing == "west" then
                         m.turnAround()
+                    elseif m.facing == "east" then
+                        m.right()
+                    elseif m.facing == "west" then
+                        m.left()
                     end
-                elseif m.facing == "east" then
-                    print("facing east")
+                elseif m.facing == "south" then
+                    print("facing south")
                     for i=1, steps do
                         m.forward()
                     end
                 end
 
             elseif pos.z > location then
-                if m.facing ~= "west" then
-                    if m.facing == "north" then
-                        m.left()
-                    elseif m.facing == "south" then
+                if m.facing ~= "north" then
+                    if m.facing == "west" then
                         m.right()
-                    elseif m.facing == "east" then
+                    elseif m.facing == "south" then
                         m.turnAround()
+                    elseif m.facing == "east" then
+                        m.left()
                     end
-                elseif m.facing == "west" then
-                    print("facing west")
+                elseif m.facing == "north" then
+                    print("facing north")
                     for i=1, steps do
                         m.forward()
                     end
