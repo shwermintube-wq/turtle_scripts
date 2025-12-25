@@ -208,41 +208,49 @@ end
     local steps = math.abs(dist)
 
     local location = z
-    local facing = m.sync().facing
+
+    print(location)
 
     if pos.z ~= location then
-        if pos.z < location then
-            if facing ~= "south" then
-                if facing == "west" then
-                    m.left()
-                elseif facing == "east" then
-                    m.right()
-                elseif facing == "north" then
-                    m.turnAround()
+        while pos.z ~= location do
+            if pos.z < location then
+                if m.facing ~= "east" then
+                    if m.facing == "north" then
+                        m.right()
+                    elseif m.facing == "south" then
+                        m.left()
+                    elseif m.facing == "west" then
+                        m.turnAround()
+                    end
+                elseif m.facing == "east" then
+                    print("facing east")
+                    for i=1, steps do
+                        m.forward()
+                    end
                 end
-            else
-                for i=1, steps do
-                m.forward()
+
+            elseif pos.z > location then
+                if m.facing ~= "west" then
+                    if m.facing == "north" then
+                        m.left()
+                    elseif m.facing == "south" then
+                        m.right()
+                    elseif m.facing == "east" then
+                        m.turnAround()
+                    end
+                elseif m.facing == "west" then
+                    print("facing west")
+                    for i=1, steps do
+                        m.forward()
+                    end
                 end
             end
 
-        elseif pos.z > location then
-            if facing ~= "north" then
-                if facing == "east" then
-                    m.left()
-                elseif facing == "west" then
-                    m.right()
-                elseif facing == "south" then
-                    m.turnAround()
-                end
-            else
-                for i=1, steps do
-                    m.forward()
-                end
-            end
+            pos = m.sync()
+            os.sleep(0.5)
         end
+        
     else
-
     end
 
  end
@@ -251,21 +259,22 @@ end
     local pos = m.sync()
 
     local dist = pos.y - y
-    local steps = math.abs(dist)
-    
-    local facing = m.sync().facing
+    local hops = math.abs(dist)
+    local location = y
+
+    print(location)
 
     if pos.y ~= y then
-        if facing ~= "north" then
-            if facing == "west" then
+        if m.facing ~= "north" then
+            if m.facing == "west" then
                 m.right()
-            elseif facing == "east" then
+            elseif m.facing == "east" then
                 m.left()
-            elseif facing == "south" then
+            elseif m.facing == "south" then
                 m.turnAround()
             end
         else
-            for i=1, steps do
+            for i=1, hops do
                 if pos.y < y then
                     m.up()
                 elseif pos.y > y then
