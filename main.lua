@@ -95,27 +95,32 @@ local function handleCommand(sender, msg)
         local atBank = pos.x == BANK.x and pos.z == BANK.z and pos.y == BANK.y
         local banked = false
 
-        
+        local n = 16
 
         local slot = 1
 
         while true do
-            if banked == true then return end
-            if atBank then
-                if banked == false then
-                    for i=1,16 do
-                    move.select(slot)
-                    move.drop()
+            if banked ~= true then 
+                if atBank then
+                    for i=1, n do
+                        if i == n then
+                            move.select(slot)
+                            move.drop()
+                            move.left(2)
+                            break
+                        end
+                        move.select(slot)
+                        move.drop()
+                        slot = slot + 1
                     end
-                    banked = true
-                else
-                    move.select(1)
-                    move.left(2)
-                    return
+
+                    
                 end
-            else
-            end
+             end
+            
         end
+
+
     end
 end -- End of handler
 
