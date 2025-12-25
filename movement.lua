@@ -6,10 +6,10 @@ local m = {
 }
 
  function m.sync()
-     local pos = gps.locate()
+     -- local pos = gps.locate()
 
-     m.saveTPos(pos.x,pos.z,pos.y)
-     return {x=pos.x,y=pos.y,z=pos.z, facing = m.loadFacing()}
+    -- m.saveTPos(pos.x,pos.z,pos.y)
+    -- return {x=pos.x,y=pos.y,z=pos.z, facing = m.loadFacing()} 
  end
  
  function m.up()
