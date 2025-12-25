@@ -7,8 +7,8 @@ local m = {
 
  function m.sync()
      local pos = gps.locate()
-     m.saveTPos(pos[1],pos[2],pos[3])
-     return {x=pos[1],y=pos[2],z=pos[3], facing = m.loadFacing()}
+     m.saveTPos(pos.x,pos.z,pos.y)
+     return {x=pos.x,y=pos.y,z=pos.z, facing = m.loadFacing()}
  end
  
  function m.up()
