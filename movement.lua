@@ -149,6 +149,7 @@ function m.findX(x)
             end
 
             pos = m.sync()
+            os.sleep(0.5)
         end
         
     else
