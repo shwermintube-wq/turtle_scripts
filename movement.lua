@@ -424,18 +424,22 @@ end
     end
 
     while pos.x ~= entrance.x or pos.z ~= entrance.z or pos.y ~= entrance.y do
+
         pos = m.sync()
 
+        
         if pos.x ~= entrance.x then
             m.findX(entrance.x)
             
-        elseif pos.z ~= entrance.z and pos.x == entrance.x then
+        elseif pos.z ~= entrance.z then
             m.findZ(entrance.z)
             
-        elseif pos.y ~= entrance.y and pos.x == entrance.x and pos.z == entrance.z then
+        elseif pos.y ~= entrance.y then
             m.findY(entrance.y)
+            os.sleep(0.2)
+        else
+            return
         end
-        os.sleep(0.2)
     end
 end
 
