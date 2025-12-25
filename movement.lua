@@ -7,6 +7,12 @@ local m = {
 
  function m.sync()
      local pos = gps.locate()
+
+     if type(pos) ~= "table" then
+        print("Error: GPS locate not a table")
+        return nil
+     end
+
      m.saveTPos(pos.x,pos.z,pos.y)
      return {x=pos.x,y=pos.y,z=pos.z, facing = m.loadFacing()}
  end
