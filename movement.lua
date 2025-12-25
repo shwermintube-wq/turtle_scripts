@@ -155,6 +155,7 @@ function m.findX(x)
         end
         
     else
+
     end
     
     
@@ -210,7 +211,7 @@ end
     local location = z
 
     print(location)
-
+    print("finding Z")
     if pos.z ~= location then
         while pos.z ~= location do
             if pos.z < location then
