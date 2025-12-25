@@ -9,7 +9,7 @@ local m = {
      local pos = gps.locate()
 
      if type(pos) ~= "table" then
-        print("Error: GPS locate not a table")
+        print(type(pos))
         return nil
      end
 
@@ -33,7 +33,7 @@ local m = {
  end
 
  function m.saveTPos(x,y,z)
-    local file = fs.open("position", "w")
+    local file = fs.open("position.txt", "w")
     if file then
         file.writeLine(x)
         file.writeLine(y)
@@ -48,13 +48,28 @@ local m = {
     if fs.exists("position.txt") then
         local file = fs.open("position.txt", "r")
         local x = tonumber(file.readLine())
-        local x = tonumber(file.readLine())
+        local z = tonumber(file.readLine())
         local y = tonumber(file.readLine())
         file.close()
         return {x = x, y = y, z = z}
     else
         print("Position file not found. Returning default position,")
         return {x=0,y=0,z=0}
+    end
+ end
+
+ function m.createTPos()
+    if not fs.exists("position.txt") then
+        
+        local file = fs.open("position.txt", "w")
+        local sP = gps.locate()
+        file.writeLine(sP.x)
+        file.writeLine(sP.z)
+        file.writeLine(sP.y)
+        file.close()
+        print("Starting position file created")
+    else
+        print("File already exists")
     end
  end
  

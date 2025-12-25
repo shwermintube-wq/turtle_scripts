@@ -93,4 +93,5 @@ local function handleCommand(sender, msg)
 end -- End of handler
 
 move.createFacing()
+move.createTPos()
 net.listen(handleCommand)
