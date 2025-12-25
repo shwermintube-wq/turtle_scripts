@@ -86,47 +86,7 @@ local function handleCommand(sender, msg)
         move.entrance()
 
     elseif msg == "bank" then
-        local pos = move.sync()
-        local atBank = false
-        local banked = false
-
-        print("Debug Bank")
-        local n = 16
-
-        local slot = 1
-
-        move.findX(BANK.x)
-        move.findZ(BANK.z)
-        move.findY(BANK.y)
-
-        if pos.x == BANK.x and pos.y == BANK.y and pos.z == BANK.z then atBank = true end
-
-
-        print(atBank)
-        if atBank then
-
-            if banked ~= true then 
-                print("Banking check 1")
-                if atBank then
-                    print("Banking check 2")
-                    for i=1, n do
-                        print("Banking check 3")
-                        if i == n then
-                            move.select(slot)
-                            move.drop()
-                            move.left(2)
-                        end
-                        move.select(slot)
-                        move.drop()
-                        slot = slot + 1
-                    end
-
-                    banked = true
-                end
-             end
-            
-        end
-
+        move.bank()
 
     end
 end -- End of handler

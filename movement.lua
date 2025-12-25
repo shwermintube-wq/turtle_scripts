@@ -347,7 +347,7 @@ function m.bank()
         turtle.select(1)
         selectedSlot = 1
         m.turnAround()
-        return "Banked"
+        
 
     end
 end
