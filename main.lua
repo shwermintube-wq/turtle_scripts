@@ -87,19 +87,24 @@ local function handleCommand(sender, msg)
         move.entrance()
 
     elseif msg == "bank" then
-        move.findX(BANK.x)
-        move.findZ(BANK.z)
-        move.findY(BANK.y)
-
         local pos = move.sync()
-        local atBank = pos.x == BANK.x and pos.z == BANK.z and pos.y == BANK.y
+        local atBank = false
         local banked = false
 
         local n = 16
 
         local slot = 1
 
-        while true do
+        move.findX(BANK.x)
+        move.findZ(BANK.z)
+        move.findY(BANK.y)
+
+        if pos.x == BANK.x and pos.y == BANK.y and pos.z == BANK.z then atBank = true end
+
+
+
+        if atBank then
+
             if banked ~= true then 
                 if atBank then
                     for i=1, n do
@@ -107,14 +112,13 @@ local function handleCommand(sender, msg)
                             move.select(slot)
                             move.drop()
                             move.left(2)
-                            break
                         end
                         move.select(slot)
                         move.drop()
                         slot = slot + 1
                     end
 
-                    
+                    banked = true
                 end
              end
             
