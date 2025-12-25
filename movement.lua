@@ -239,7 +239,7 @@ end
                 if m.facing ~= "north" then
                     if m.facing == "west" then
                         m.right()
-                    elseif m.facing == "south" then
+                    elseif m.facing == "south" and pos.z > location then
                         m.turnAround()
                     elseif m.facing == "east" then
                         m.left()
