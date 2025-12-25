@@ -108,7 +108,7 @@ function m.findX(x)
     local pos = m.sync()
 
     local location = x
-    local facing = m.sync().facing
+
 
     print(location)
 
@@ -118,15 +118,15 @@ function m.findX(x)
     if pos.x ~= location then
         while pos.x ~= location do
             if pos.x < location then
-                if facing ~= "east" then
-                    if facing == "north" then
+                if m.sync().facing ~= "east" then
+                    if m.sync().facing == "north" then
                         m.right()
-                    elseif facing == "south" then
+                    elseif m.sync().facing == "south" then
                         m.left()
-                    elseif facing == "west" then
+                    elseif m.sync().facing == "west" then
                         m.turnAround()
                     end
-                elseif facing == "east" then
+                elseif m.sync().facing == "east" then
                     print("facing east")
                     for i=1, steps do
                         m.forward()
@@ -134,16 +134,16 @@ function m.findX(x)
                 end
 
             elseif pos.x > location then
-                if facing ~= "west" then
-                    if facing == "north" then
+                if m.sync().facing ~= "west" then
+                    if m.sync().facing == "north" then
                         m.left()
-                    elseif facing == "south" then
+                    elseif m.sync().facing == "south" then
                         m.right()
-                    elseif facing == "east" then
+                    elseif m.sync().facing == "east" then
                         m.turnAround()
                     end
-                elseif facing == "west" then
-                    print("west")
+                elseif m.sync().facing == "west" then
+                    print("facing west")
                     for i=1, steps do
                         m.forward()
                     end
