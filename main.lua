@@ -102,17 +102,20 @@ local function handleCommand(sender, msg)
         while true do
             if banked == true then return end
             if atBank then
-                for i=1,16 do
+                if banked == false then
+                    for i=1,16 do
                     move.select(slot)
                     move.drop()
+                    end
+                    banked = true
+                else
+                    move.select(1)
+                    move.left(2)
+                    return
                 end
-                banked = true
             else
             end
-
         end
-        turtle.select(1)
-        move.turnAround()
     end
 end -- End of handler
 
