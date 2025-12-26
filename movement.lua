@@ -347,6 +347,7 @@ function m.checkEmptyInventory()
     local item = turtle.getItemDetail()
 
     for i=1, slots do
+        print(slot)
         m.select(slot)
         if item then
             local isEmpty = true
