@@ -264,25 +264,14 @@ end
 
     print(location)
 
-    if pos.y ~= y then
-        if m.facing ~= "north" then
-            if m.facing == "west" then
-                m.right()
-            elseif m.facing == "east" then
-                m.left()
-            elseif m.facing == "south" then
-                m.turnAround()
-            end
-        else
-            for i=1, hops do
-                if pos.y < y then
-                    m.up()
-                elseif pos.y > y then
-                    m.down()
-                end
+    if pos.y ~= y then   
+        for i=1, hops do
+            if pos.y < y then
+                m.up()
+            elseif pos.y > y then
+                 m.down()
             end
         end
-    else
     end
   end
 
