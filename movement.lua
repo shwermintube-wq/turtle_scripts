@@ -164,16 +164,6 @@ end
      for i=1,2 do m.left() end
  end
  
- function m.getItemDetail()
-     local detail = turtle.getItemDetail()
-     
-     if detail then
-         return detail.name,detail.count
-     else
-        return nil
-     end    
- end
- 
  function m.getSelectedSlot()
     local slot = turtle.getSelectedSlot()
     return slot
@@ -354,15 +344,16 @@ function m.checkEmptyInventory()
     local slots = 16
     local slot = 1
     local isEmpty = false
+    local item = turtle.getItemDetail()
 
     for i=1, slots do
         m.select(slot)
-        if m.getItemDetail() then
+        if item then
             local isEmpty = true
             m.select(1)
             print(isEmpty)
             return isEmpty
-        elseif i == 16 and m.getItemDetail() == nil then
+        elseif i == 16 and item == nil then
             m.select(1)
             print(isEmpty)
             return isEmpty
@@ -379,19 +370,21 @@ function m.checkIfFuel()
     local slot = 1
     local amount = 0
     local exists = false
+    local item = turtle.getItemDetail()
 
     for i=1, slots do
         m.select(slot)
-        if m.getItemDetail.name == "minecraft:coal" then
-            if m.getItemDetail.name == "minecraft:coal" then
-                amount = amount + m.getItemDetail.count
+        if item.name == "minecraft:coal" then
+            if item.name == "minecraft:coal" then
+                amount = amount + item.count
 
             end
             exists = true
+            print(amount,exists)
         end
         slot = slot + 1
     end
-    print(amount,exists)
+    
     return amount,exists
 end
 

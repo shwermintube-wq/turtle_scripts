@@ -66,7 +66,7 @@ local function handleCommand(sender, msg)
     elseif msg == "turnAround" then
         move.turnAround()
         return "Turned around"
-        
+
     elseif msg == "detectUp" then
         move.dUp()
     elseif msg == "detectDown" then
@@ -93,7 +93,14 @@ local function handleCommand(sender, msg)
     elseif msg == "bank" then
         move.bank()
         return "Banked"
+
+    elseif msg == "checkIfFuel" then
+        move.checkIfFuel()
+
+    elseif msg == "checkEmptyInventory" then
+        move.checkEmptyInventory()
     end
+
 end -- End of handler
 
 net.listen(handleCommand)
