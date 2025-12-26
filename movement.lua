@@ -327,9 +327,18 @@ function m.bank()
 
     if pos.x ~= bankCoords.x or pos.y ~= bankCoords.y or pos.z ~= bankCoords.z then
         
+        local slots = 16
+        local selectedSlot = 1
         m.findX(bankCoords.x)
         m.findZ(bankCoords.z)
         m.findY(bankCoords.y)
+
+        for i=1, 16 do
+            turtle.select(selectedSlot)
+            turtle.drop()
+            selectedSlot = selectedSlot + 1
+        end
+        return "Banked"
 
     else
         local slots = 16
@@ -340,9 +349,6 @@ function m.bank()
             turtle.drop()
             selectedSlot = selectedSlot + 1
         end
-        turtle.select(1)
-        selectedSlot = 1
-        m.turnAround()
         return "Banked"
 
     end
