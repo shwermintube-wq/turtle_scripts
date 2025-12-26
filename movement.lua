@@ -327,6 +327,8 @@ function m.bank()
             turtle.drop()
             selectedSlot = selectedSlot + 1
         end
+
+        m.turnAround()
         return "Banked"
 
     else
@@ -338,6 +340,8 @@ function m.bank()
             turtle.drop()
             selectedSlot = selectedSlot + 1
         end
+
+        m.turnAround()
         return "Banked"
 
     end

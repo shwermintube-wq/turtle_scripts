@@ -63,6 +63,10 @@ local function handleCommand(sender, msg)
         end
         return "Turned right"..amount
 
+    elseif msg == "turnAround" then
+        move.turnAround()
+        return "Turned around"
+        
     elseif msg == "detectUp" then
         move.dUp()
     elseif msg == "detectDown" then
