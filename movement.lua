@@ -350,7 +350,8 @@ function m.checkEmptyInventory()
         print(slot)
         m.select(slot)
         if item then
-            local isEmpty = true
+            print(slot)
+            local isEmpty = false
             m.select(1)
             print(isEmpty)
             return isEmpty
