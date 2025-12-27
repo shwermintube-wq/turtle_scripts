@@ -1,12 +1,13 @@
-local entrance = require(locations.entrance)
-
-local ENTRANCE = entrance.pos
-
 local north = "north"
 local east = "east"
 local west = "west"
 local south = "south"
 
+local entrance = {
+        x = 15742,
+        y = 254,
+        z = 7052
+    }
 
 local m = {
     pos = {x=0,y=0,z=0},
@@ -328,8 +329,6 @@ end
     local hops = math.abs(dist)
     local location = y
 
-    print(location)
-
     if pos.y ~= y then   
         for i=1, hops do
             if pos.y < y then
@@ -347,13 +346,6 @@ end
     local atX = false
     local atZ = false
     local atY = false
-
-
-    local entrance = {
-        x = 15742,
-        y = 254,
-        z = 7052
-    }
      
     local pos = m.sync()
 
