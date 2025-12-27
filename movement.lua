@@ -1,4 +1,4 @@
-local entrance = require(lib.locations.entrance)
+local entrance = require(locations.entrance)
 
 local ENTRANCE = entrance.pos
 
@@ -6,6 +6,7 @@ local north = "north"
 local east = "east"
 local west = "west"
 local south = "south"
+
 
 local m = {
     pos = {x=0,y=0,z=0},
@@ -365,12 +366,6 @@ end
 
 function m.bank()
     local pos = m.sync()
-
-    local entrance = {
-        x = 15742,
-        y = 254,
-        z = 7052
-    }
 
     local bankCoords = {
         x = 15741,
