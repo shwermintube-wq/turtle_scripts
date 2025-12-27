@@ -1,47 +1,127 @@
+local entrance = require(lib.locations.entrance)
+
+local ENTRANCE = entrance.pos
+
+local north = "north"
+local east = "east"
+local west = "west"
+local south = "south"
+
 local m = {
     pos = {x=0,y=0,z=0},
     dir = 0
 }
 
-m.facing = "north"
-
-
  function m.sync()
      local x,y,z = gps.locate()
-     return {x=x,y=y,z=z, facing = m.facing}
+     m.savePos(x,y,z)
+
+     local facing = m.loadFacing()
+     return {x=x,y=y,z=z, facing = facing}
+ end
+
+ function m.saveFacing(facing)
+    local file = fs.open("facing.txt", "w")
+    if file then
+        file.write(facing)
+        file.close()
+    end
+ end
+
+ function m.loadFacing()
+    local file = fs.open("facing.txt", "w")
+    if file then
+        local facing = file.readAll()
+        file.close()
+        return facing
+    end
  end
  
  function m.up()
      turtle.up()
+     m.sync()
  end
  
  function m.down()
      turtle.down()
+     m.sync()
  end   
  function m.forward()
      turtle.forward()
+     m.sync()
  end
  
  function m.back()
      turtle.back()
+     m.sync()
+ end
+
+ function m.loadPos()
+    local exists = fs.exists("position.txt")
+
+    if exists then
+        local file = fs.open(position, "r")
+        local content = file.readAll()
+        local table = textutils.unserialise(content)
+        file.close()
+
+        local x = table.x
+        local y = table.y
+        local z = table.z
+
+        return x,y,z
+
+    end
+ end
+
+ function m.savePos(x,y,z)
+    local table = {x=x,y=y,z=z}
+    local serialized = textutils.serialise(table)
+    local file = fs.open("position.txt", "w")
+    file.write(serialized)
+    file.close()
+
+ end
+
+ function m.initialize()
+    local file1 = fs.exists("position.txt")
+    local file2 = fs.exists("facing.txt")
+
+    if not file1 then
+        m.savePos()
+    elseif not file2 then
+        m.saveFacing("north")
+    else
+    end
  end
  
  function m.left()
      turtle.turnLeft()
-     if m.facing == "north" then m.facing = "west"
-     elseif m.facing == "east" then m.facing = "north"
-     elseif m.facing == "south" then m.facing = "east"
-     elseif m.facing == "west" then m.facing = "south"
+
+     local facing = m.loadFacing()
+
+     local file = fs.open("facing.txt", "w")
+     if facing == north then m.saveFacing(west)
+     elseif facing == east then m.saveFacing(north)
+     elseif facing == south then m.saveFacing(east)
+     elseif facing == west then m.saveFacing(south)
      end
+     file.close()
  end
  
  function m.right()
      turtle.turnRight()
-     if m.facing == "north" then m.facing = "east"
-     elseif m.facing == "east" then m.facing = "south"
-     elseif m.facing == "south" then m.facing = "west"
-     elseif m.facing == "west" then m.facing = "north"
+
+     local facing = m.loadFacing()
+
+     local file = fs.open("facing.txt", "w")
+
+     if facing == north then m.saveFacing(east)
+     elseif facing == east then m.saveFacing(south)
+     elseif facing == south then m.saveFacing(west)
+     elseif facing == west then m.saveFacing(north)
      end
+     file.close()
  end
  
  function m.detectUp()
@@ -109,41 +189,36 @@ function m.findX(x)
 
     local location = x
 
-
-    print(location)
-
     local dist = pos.x - location
     local steps = math.abs(dist)
 
     if pos.x ~= location then
         while pos.x ~= location do
             if pos.x < location then
-                if m.facing ~= "east" then
-                    if m.facing == "north" then
+                if pos.facing ~= east then
+                    if pos.facing == north then
                         m.right()
-                    elseif m.facing == "south" then
+                    elseif pos.facing == south then
                         m.left()
-                    elseif m.facing == "west" then
+                    elseif pos.facing == west then
                         m.turnAround()
                     end
-                elseif m.facing == "east" then
-                    print("facing east")
+                elseif pos.facing == east then
                     for i=1, steps do
                         m.forward()
                     end
                 end
 
             elseif pos.x > location then
-                if m.facing ~= "west" then
-                    if m.facing == "north" then
+                if pos.facing ~= west then
+                    if pos.facing == north then
                         m.left()
-                    elseif m.facing == "south" then
+                    elseif pos.facing == south then
                         m.right()
-                    elseif m.facing == "east" then
+                    elseif pos.facing == east then
                         m.turnAround()
                     end
-                elseif m.facing == "west" then
-                    print("facing west")
+                elseif pos.facing == west then
                     for i=1, steps do
                         m.forward()
                     end
@@ -173,21 +248,22 @@ end
     turtle.select(slot)
  end
  
- function m.getFuelLevel()
-     turtle.getFuelLevel()
- end
- 
- function m.getFacing()
-     print(m.facing)
- end
+ function m.checkFuelLevel()
+     local minLevel = 20
+     local enough = false
+     local level = turtle.getFuelLevel()
 
+     if level > minLevel then enough = true print(enough) return true elseif level <= minLevel then print(enough)  return false end
+end
+ 
  function m.faceNorth()
-    if m.facing ~= "north" then
-        if m.facing == "south" then
+    local pos = m.sync()
+    if pos.facing ~= north then
+        if pos.facing == south then
             m.turnAround()
-        elseif m.facing == "east" then
+        elseif pos.facing == east then
             m.right()
-        elseif m.facing == "west" then
+        elseif pos.facing == west then
             m.left()
         end
     else
@@ -202,37 +278,33 @@ end
 
     local location = z
 
-    print(location)
-
     if pos.z ~= location then
         while pos.z ~= location do
             if pos.z < location then
-                if m.facing ~= "south" then
-                    if m.facing == "north" then
+                if pos.facing ~= south then
+                    if pos.facing == north then
                         m.turnAround()
-                    elseif m.facing == "east" then
+                    elseif pos.facing == east then
                         m.right()
-                    elseif m.facing == "west" then
+                    elseif pos.facing == west then
                         m.left()
                     end
-                elseif m.facing == "south" then
-                    print("facing south")
+                elseif pos.facing == south then
                     for i=1, steps do
                         m.forward()
                     end
                 end
 
             elseif pos.z > location then
-                if m.facing ~= "north" then
-                    if m.facing == "west" then
+                if pos.facing ~= north then
+                    if m.facing == west then
                         m.right()
-                    elseif m.facing == "south" then
+                    elseif pos.facing == south then
                         m.turnAround()
-                    elseif m.facing == "east" then
+                    elseif pos.facing == east then
                         m.left()
                     end
-                elseif m.facing == "north" then
-                    print("facing north")
+                elseif pos.facing == north then
                     for i=1, steps do
                         m.forward()
                     end
@@ -343,14 +415,12 @@ end
 function m.checkEmptyInventory()
     local slots = 16
     local slot = 1
-    local isEmpty = false
+    local isEmpty = true
     local item = turtle.getItemDetail()
 
     for i=1, slots do
-        print(slot)
         m.select(slot)
         if item then
-            print(slot)
             local isEmpty = false
             m.select(1)
             print(isEmpty)
@@ -377,10 +447,7 @@ function m.checkIfFuel()
     for i=1, slots do
         m.select(slot)
         if item.name == "minecraft:coal" then
-            if item.name == "minecraft:coal" then
-                amount = amount + item.count
-
-            end
+            amount = amount + item.count
             exists = true
             print(amount,exists)
         end
@@ -389,5 +456,13 @@ function m.checkIfFuel()
     
     return amount,exists
 end
+
+--[[ function m.mining()
+    local entranceY = entrance.
+    while true do
+        m.sync()
+        os.sleep(0.5)
+    end
+end ]]
 
 return m
