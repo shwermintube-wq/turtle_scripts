@@ -99,7 +99,7 @@ local m = {
  
  function m.left()
      turtle.turnLeft()
-
+     print(west)
      local facing = m.loadFacing()
 
      local file = fs.open("facing.txt", "w")
