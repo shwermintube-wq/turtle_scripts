@@ -31,7 +31,7 @@ local m = {
  end
 
  function m.loadFacing()
-    local file = fs.open("facing.txt", "w")
+    local file = fs.open("facing.txt", "r")
     if file then
         local facing = file.readAll()
         file.close()
